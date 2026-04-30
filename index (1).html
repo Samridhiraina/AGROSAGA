@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGROSAGA Interactive Chart</title>
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <style>
+    body{
+      margin:0;
+      padding:0;
+      background:white;
+      font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+    }
+    .title{
+      font-size:42px;
+      font-weight:700;
+      margin:30px 0 0 60px;
+      color:#1e1e1e;
+    }
+    #chart{
+      width:1100px;
+      height:560px;
+      margin:10px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">AGROSAGA</div>
+  <div id="chart"></div>
+
+<script>
+const years = ['Year 1','Year 2','Year 3'];
+
+const revenue = {
+  x: years,
+  y: [3,6.25,26],
+  name: 'Revenue (₹ Cr)',
+  type: 'bar',
+  marker: {color:['#7EA595','#5D8577','#274C3F']},
+  hovertemplate:'<b>Revenue (₹ Cr)</b><br><span style="font-size:28px"><b>%{y}</b></span><br>%{x}<extra></extra>'
+};
+
+const costs = {
+  x: years,
+  y: [4.6,2.3,10.5],
+  name: 'Costs (₹ Cr)',
+  type: 'bar',
+  marker: {color:['#A8D8B9','#7CB58F','#2F8F4E']},
+  hovertemplate:'<b>Costs (₹ Cr)</b><br><span style="font-size:28px"><b>%{y}</b></span><br>%{x}<extra></extra>'
+};
+
+const layout = {
+  barmode:'group',
+  paper_bgcolor:'rgba(0,0,0,0)',
+  plot_bgcolor:'rgba(0,0,0,0)',
+  margin:{l:40,r:60,t:20,b:90},
+  xaxis:{
+    tickfont:{size:18,color:'#555'},
+    showgrid:false,
+    zeroline:false
+  },
+  yaxis:{
+    range:[0,30],
+    dtick:5,
+    side:'right',
+    gridcolor:'rgba(0,0,0,0.08)',
+    zeroline:false,
+    tickfont:{size:14,color:'#777'}
+  },
+  legend:{
+    orientation:'h',
+    x:0.05,
+    y:1.12,
+    font:{size:16}
+  },
+  hoverlabel:{
+    bgcolor:'#222',
+    bordercolor:'#222',
+    font:{color:'white',size:16}
+  },
+  annotations:[
+    {
+      text:'<b>EBITDA Positive from Year 2 · Revenue scales 8.6× by Year 3</b>',
+      xref:'paper', yref:'paper',
+      x:0.5, y:-0.22,
+      showarrow:false,
+      font:{size:16,color:'#1f5d35'},
+      bgcolor:'#DDF5E3',
+      borderpad:10
+    }
+  ]
+};
+
+Plotly.newPlot('chart',[revenue,costs],layout,{displayModeBar:false,responsive:true});
+</script>
+</body>
+</html>
